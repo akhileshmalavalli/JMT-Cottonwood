@@ -3,8 +3,8 @@ SET delay 1
 SET tripLeaderFirstName --FIRST NAME--
 SET tripLeaderLastName --LAST NAME--
 SET tripLeaderPhone --PHONE NUMBER--
-SET username --EMAIL--
-SET pass --PASSWORD--
+SET username --RECREATION.GOV USERNAME--
+SET pass --RECREATION.GOV PASSWORD--
 SET startDate --TRIP START DATE--
 SET groupSize --GROUP SIZE--
 
