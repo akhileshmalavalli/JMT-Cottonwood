@@ -1,0 +1,85 @@
+VERSION BUILD=8340723 RECORDER=CR
+SET delay 1
+SET tripLeaderFirstName --FIRST NAME--
+SET tripLeaderLastName --LAST NAME--
+SET tripLeaderPhone --PHONE NUMBER--
+SET username --EMAIL--
+SET pass --PASSWORD--
+SET startDate --TRIP START DATE--
+SET groupSize --GROUP SIZE--
+
+
+
+SET D "var d = new Date('{{startDate}}');"
+ADD D "d.setDate(d.getDate() + 31);"
+ADD D "d = ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + '/' + d.getFullYear();"
+SET endDate EVAL("eval('{{D}}'); d;")
+
+URL GOTO=http://www.recreation.gov/permits/Inyo_National_Forest_Wilderness_Permits/r/entranceSearch.do?search=site&page=siteresult&contractCode=NRSO&parkId=72203
+TAG POS=1 TYPE=SELECT FORM=ID:unifSearchForm ATTR=ID:permitTypeId CONTENT=%1009487185
+WAIT SECONDS=1
+TAG POS=1 TYPE=SELECT FORM=ID:unifSearchForm ATTR=ID:entrance CONTENT=%315399|1022
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:unifSearchForm ATTR=ID:entryStartDate CONTENT={{startDate}}
+WAIT SECONDS=1
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:unifSearchForm ATTR=ID:groupSize CONTENT={{groupSize}}
+TAG POS=1 TYPE=BUTTON FORM=ID:unifSearchForm ATTR=ID:permitAvailabilitySearchButton
+
+WAIT SECONDS=3
+TAG POS=1 TYPE=A ATTR=TXT:See<SP>Details
+TAG POS=1 TYPE=BUTTON FORM=ID:bookPermitForm ATTR=ID:permitBookButton
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:existing_cust ATTR=ID:AemailGroup_1733152645 CONTENT={{username}}
+SET !ENCRYPTION NO
+TAG POS=1 TYPE=INPUT:PASSWORD FORM=ID:existing_cust ATTR=ID:ApasswrdGroup_704558654 CONTENT={{pass}}
+
+WAIT SECONDS=3
+TAG POS=1 TYPE=* ATTR=ID:submitForm_submitForm*
+
+WAIT SECONDS=3
+
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:exitpointid CONTENT=%315601
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:permitOrderDetailsForm ATTR=ID:exitdateid CONTENT={{endDate}}
+WAIT SECONDS=5
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint0id CONTENT=%2199
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint1id CONTENT=%2197
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint2id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint3id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint4id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint5id CONTENT=%1798
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint6id CONTENT=%2025
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint7id CONTENT=%2026
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint8id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint9id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint10id CONTENT=%2448
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint11id CONTENT=%1867
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint12id CONTENT=%2251
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint13id CONTENT=%2185
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint14id CONTENT=%2188
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint15id CONTENT=%1933
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint16id CONTENT=%2191
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint17id CONTENT=%2123
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint18id CONTENT=%2286
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint19id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint20id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint21id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint22id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint23id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint24id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint25id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint26id CONTENT=%2080
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint27id CONTENT=%2106
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint28id CONTENT=%2315
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint29id CONTENT=%2322
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:tripitinerarypoint30id CONTENT=%2318
+
+TAG POS=1 TYPE=SELECT FORM=ID:permitOrderDetailsForm ATTR=ID:travelmethodid CONTENT=%101_optional
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:permitOrderDetailsForm ATTR=ID:qtyStocksId CONTENT=0
+TAG POS=2 TYPE=INPUT:TEXT FORM=ID:permitOrderDetailsForm ATTR=ID:qtyStocksId CONTENT=0
+TAG POS=3 TYPE=INPUT:TEXT FORM=ID:permitOrderDetailsForm ATTR=ID:qtyStocksId CONTENT=0
+TAG POS=4 TYPE=INPUT:TEXT FORM=ID:permitOrderDetailsForm ATTR=ID:qtyStocksId CONTENT=0
+TAG POS=5 TYPE=INPUT:TEXT FORM=ID:permitOrderDetailsForm ATTR=ID:qtyStocksId CONTENT=0
+
+TAG POS=1 TYPE=INPUT:TEXT FORM=ID:permitOrderDetailsForm ATTR=ID:id CONTENT={{tripLeaderFirstName}}
+TAG POS=2 TYPE=INPUT:TEXT FORM=ID:permitOrderDetailsForm ATTR=ID:id CONTENT={{tripLeaderLastName}}
+TAG POS=3 TYPE=INPUT:TEXT FORM=ID:permitOrderDetailsForm ATTR=ID:id CONTENT={{tripLeaderPhone}}
+
+TAG POS=1 TYPE=INPUT:CHECKBOX ATTR=NAME:agreementAccepted CONTENT=YES
